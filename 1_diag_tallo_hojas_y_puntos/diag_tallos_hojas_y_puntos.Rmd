@@ -1,0 +1,19 @@
+---
+title: "Diag tallos y hojas / puntos"
+output: word_document
+date: "2025-02-01"
+---
+
+```{r}
+x <- c(523, 675, 234, 890, 456, 789, 345, 678, 234, 567, 789, 345, 678, 234, 567, 890, 456, 789, 345, 678
+)
+
+x
+```
+```{r}
+stem(x, scale=2)
+```
+```{r}
+stripchart(x, method = "stack", pch=19, offset = 1/2)
+```
+
