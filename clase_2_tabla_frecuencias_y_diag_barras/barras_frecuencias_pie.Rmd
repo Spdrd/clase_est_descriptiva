@@ -1,0 +1,43 @@
+---
+title: "Tabla Frecuencias y Barras"
+output: word_document
+date: "2025-02-03"
+---
+```{r}
+library(readxl)
+tv_prog <- read_excel("C:/Users/Sonyvideo1/Programas Personales/RCosas/clase_est_descriptiva/2_tabla_frecuencias_y_diag_barras/rating _Diagrama de barras y circular_.xlsx")
+```
+
+# Tabla de frecuencias para datos categoricos
+
+```{r}
+tabla <- data.frame(table(rating))
+tabla
+```
+
+```{r}
+tabla2 <- transform(tabla, 
+                    FA = cumsum(Freq), 
+                    FR = round(prop.table(Freq), 2), 
+                    FRA = round(cumsum(prop.table(Freq)), 2))
+
+tabla2
+```
+
+```{r}
+porcentaje<-round(prop.table(table(rating))*100,2)
+
+porcentaje
+```
+```{r}
+y<-barplot(table(rating),main = "Programas más vistos", axes=F, col=rainbow(4))
+```
+```{r}
+lab1<-c("ABC", "CBS", "FOX", "NBC")
+lab2<-paste(lab1,porcentaje,"%")
+lab2
+```
+```{r}
+pie(table(rating), main = "Programas más vistos", col=rainbow(4), labels=lab2)
+```
+

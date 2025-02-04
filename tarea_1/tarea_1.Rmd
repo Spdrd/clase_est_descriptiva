@@ -1,0 +1,67 @@
+---
+title: "Tarea_1"
+output:
+  word_document: default
+  pdf_document: default
+date: "2025-02-03"
+---
+
+# Se importan los datos
+
+```{r}
+library(readxl)
+Programas <- read_excel("C:/Users/Sonyvideo1/Programas Personales/RCosas/clase_est_descriptiva/tarea_1/Programas.xlsx")
+View(Programas)
+```
+
+# Se crea la tabla de frecuencias sola
+
+```{r}
+tabla1 <- data.frame(table(Programas))
+tabla1
+```
+
+# Se crea la tabla de frecuencias completa
+
+Se añaden la frecuencia acumulada [FA], frecuencia relativa [FR] y frecuencia relativa acumulada [FRA]
+
+```{r}
+tabla2 <- transform(tabla1, 
+                    FA = cumsum(Freq), 
+                    FR = round(prop.table(Freq), 2), 
+                    FRA = round(cumsum(prop.table(Freq)), 2))
+
+tabla2
+```
+
+# Cálculo de porcentajes
+
+Se calcula el porcentaje que corresponde a cada programa
+
+```{r}
+porcentaje<-round(prop.table(table(Programas))*100,2)
+
+porcentaje
+```
+
+# Se crean las etiquetas
+
+```{r}
+lab0<-c("CSI", "ED", "LyO", "Sin rastro")
+lab1<-paste(porcentaje,"%")
+lab2<-paste(lab0, lab1)
+lab2
+```
+
+# Diagrama de barras
+
+```{r}
+y<-barplot(table(Programas),main = "Programas más vistos", axes=F, col=rainbow(6))
+text(y, c(2,2),labels=lab1)
+```
+
+# Diagrama Circular
+
+```{r}
+pie(table(Programas), main = "Programas más vistos", col=rainbow(4), labels=lab2)
+```
